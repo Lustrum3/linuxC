@@ -1,0 +1,22 @@
+git init                    //初始话git
+git add test.c              //添加文件到git
+git commit -m "read me"     //提交添加的文件到git 库
+git status                  //查询git状态
+git diff test.c             //检测文件修改
+git log                    //获取版本信息
+git log --pretty=oneline
+
+git reset --hard HEAD^     //git 回滚到上一版本
+
+git reflog                //查看历史命令
+
+
+git checkout -- test.c   //
+
+
+git push -u origin master   //第一次 上传master
+
+git push origin master      //后续上传分支
+
+
+
