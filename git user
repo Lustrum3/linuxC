@@ -14,9 +14,31 @@ git reflog                //查看历史命令
 git checkout -- test.c   //
 
 
-git push -u origin master   //第一次 上传master
+git push -u origin master   //第一次 上传服务器
 
 git push origin master      //后续上传分支
+
+git branch                 //查看本地分支
+
+git branch -r                             //查看远程分支
+
+git branch -a                             //查看当前所属分支
+
+git branch      分支名            //创建分支
+
+git checkout 分支名           //切换到分支
+
+git checkout -b <分支名>  //创建并切换到分支
+
+git checkout master     //切换到主分支
+
+ git merge   <分支名>  //将分支和并到 master 上
+
+git push origin  <分支名>  //提交分支
+
+
+
+
 
 
 
