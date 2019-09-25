@@ -7,11 +7,10 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
+#include "html.h"
 
-char html_buf1[]=
-"HTTP/1.1 200 OK Date: Sat, 31 Dec 2005 23:59:59 GMT Content-Type: text/html;charset=ISO-8859-1 Content-Length: 135";
-char html_buf2[]=
-"<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>01234(runoob.com)</title></head><body><h1>1234</h1><p>4567890</p></body></html>";
+extern char html_buf1[];
+extern char html_buf2[];
 
 #define BUFFSIZE 1024
 
@@ -24,13 +23,16 @@ int main(int argc, char *argv[])
 	struct sockaddr_in server_addr;
 	struct sockaddr_in client_addr;
 	char buf[BUFFSIZE] = {0};
+	
+	char send_buf[500] = {0x00};
+
 
 	bzero(&server_addr, sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = INADDR_ANY;
 	server_addr.sin_port = htons(1234);
 
-	if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+	if((server_sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
 	{
 		perror("socket error!\n");
 		return -1;
@@ -80,20 +82,14 @@ int main(int argc, char *argv[])
 
 			printf("rec len %d buf = %s\n",len,buf);
 
-			send(client_sockfd,html_buf1,sizeof(html_buf1),0); 
-			send(client_sockfd,"\r\n",2,0); 
-			send(client_sockfd,html_buf2,sizeof(html_buf2),0); 
+			sleep(1);
+			sprintf(send_buf,html_buf1,strlen(html_buf2));
+		
 
-			//	if(send(client_sockfd,html_buf,sizeof(html_buf),0) < 0)
-			//	{
-			//		perror("send error!\n");
-			//		return -1;
-			//	}
-			//	else
-			//	{
-			//		printf("send SUCCESS:\n");
-			//	}
-		}
+			send(client_sockfd,send_buf,strlen(send_buf),0);
+			send(client_sockfd,html_buf2,strlen(html_buf2),0); 
+
+           	}
 
 
 		close(client_sockfd);
