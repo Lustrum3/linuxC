@@ -82,7 +82,6 @@ int main(int argc, char *argv[])
 
 			printf("rec len %d buf = %s\n",len,buf);
 
-			sleep(1);
 			sprintf(send_buf,html_buf1,strlen(html_buf2));
 		
 

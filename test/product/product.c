@@ -79,7 +79,7 @@ void productor(void *arg)
 		if((nwrite=write(fd,"hello",5))==-1)
 		{
 			if(errno==EAGAIN)
-			printf("The FIFO has not been read yet.Please try later\n");
+				printf("The FIFO has not been read yet.Please try later\n");
 		}
 		else
 			printf("write hello to the FIFO\n");
@@ -103,7 +103,7 @@ void consumer(void *arg)
 		if((nread=read(fd,buf_r,100))==-1)
 		{
 			if(errno==EAGAIN)
-			printf("no data yet\n");
+				printf("no data yet\n");
 		}
 		printf("read %s from FIFO\n",buf_r);
 		/*V 操作信号量 avail 和 mutex*/
