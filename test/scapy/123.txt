@@ -1,0 +1,50 @@
+
+from scapy.all import *
+
+dpkt  = sniff(iface = "ens33", count = 100)
+
+dpkt  = sniff(iface = "ens33", count = 10,filter="ip dst 192.168.213.132 and tcp and tcp port 1234")
+
+
+
+wrpcap("demo.pcap", dpkt)
+
+ls()  命令可以查看所有支持的协议
+ls(IP) 命令列出ip协议头部字段格式，只要想查看哪个协议的参数，括号里就填哪个协议
+IP().show()　列出ip包的信息
+lsc() 命令列出scapy的所有命令 
+conf 命令列出scapy 的配置参数
+
+
+
+def sniff(count=0, store=1, offline=None, prn=None,filter=None, L2socket=None, timeout=None, opened_socket=None, stop_filter=None, iface=None，*args,**kargs)
+
+
+count：抓包的数量，0表示无限制；
+store：保存抓取的数据包或者丢弃，1保存，0丢弃
+offline：从 pcap 文件读取数据包，而不进行嗅探，默认为None
+prn：为每一个数据包定义一个函数，如果返回了什么，则显示。例如：prn = lambda x: x.summary()； （  packct.summar()函数返回的是对包的统计性信息 ）
+filter：过滤规则，使用wireshark里面的过滤语法
+L2socket：使用给定的 L2socket
+timeout：在给定的时间后停止嗅探，默认为 None
+opened_socket：对指定的对象使用 .recv() 进行读取；
+stop_filter：定义一个函数，决定在抓到指定数据包后停止抓包，如：stop_filter = lambda x: x.haslayer(TCP)；
+iface：指定抓包的接口 
+
+
+dpkt  = sniff(iface = "ens33", count = 10,filter="tcp and tcp port 1234")
+
+
+
+ip src 172.31.100.222
+
+dpkt  = sniff(iface = "ens33", count = 10,filter="ip dst 192.168.213.131 and tcp and tcp port 1234")
+
+
+
+
+
+
+
+
+
